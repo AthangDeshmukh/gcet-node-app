@@ -1,7 +1,7 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
-import mongoose from "mongoose";
-import mongoose from "mongoose";
+
 const app = express();
 
 
@@ -9,9 +9,21 @@ app.listen(8080, () => {
   mongoose.connect("mongodb://localhost:27017/gcet");
   console.log("Server Started");
 });
+
+const userSchema = new mongoose.Schema({
+  name: {type:String},
+});
+
+const User = mongoose.model("User", userSchema);
+
 app.use(cors());
 app.get("/", (req, res) => {
   return res.send("Good Morning");
+});
+
+app.get("/register", async (req, res) => {
+  const result = await User.insertOne({name: "Nice"});
+  return res.json(result);
 });
 
 app.get("/greet", (req, res) => {
@@ -19,7 +31,7 @@ app.get("/greet", (req, res) => {
 });
 
 app.get("/name", (req, res) => {
-  res.send("Praveen");
+  res.send("AthangDeshmukh");
 });
 
 app.get("/weather", (req, res) => {
