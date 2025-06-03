@@ -17,14 +17,22 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 app.use(cors());
+app.use(express.json())
 app.get("/", (req, res) => {
   return res.send("Good Morning");
 });
 
-app.get("/register", async (req, res) => {
-  const result = await User.insertOne({name: "Nice"});
+app.post("/register", async (req, res) => {
+  const { name, email, pass } = req.body
+  const result = await User.insertOne({name: name,email:email,pass:pass});
   return res.json(result);
 });
+
+// app.post("/login", async (req, res) => {
+//   const { email, pass } = req.body
+//   const result = await User.findOne({email, pass});
+//   return res.json(result);
+// });
 
 app.get("/greet", (req, res) => {
   res.send("Greetings");
