@@ -10,18 +10,9 @@ app.listen(8080, () => {
   console.log("Server Started");
 });
 
-const userSchema = mongoose.Schema({
-  name: {type:String},
-  email: {type:String},
-  pass: {type:String},
-});
-const User = mongoose.model("User", userSchema);
 
-const productsSchema = mongoose.Schema({
-  name: {type:String},
-  price: {type:Number},
-});
-const Product = mongoose.model("Product", productsSchema);  
+
+
 
 app.use(cors());
 app.use(express.json())
