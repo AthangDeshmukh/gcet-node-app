@@ -10,11 +10,18 @@ app.listen(8080, () => {
   console.log("Server Started");
 });
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
   name: {type:String},
+  email: {type:String},
+  pass: {type:String},
 });
-
 const User = mongoose.model("User", userSchema);
+
+const productsSchema = mongoose.Schema({
+  name: {type:String},
+  price: {type:Number},
+});
+const Product = mongoose.model("Product", productsSchema);  
 
 app.use(cors());
 app.use(express.json())
@@ -24,15 +31,16 @@ app.get("/", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { name, email, pass } = req.body
-  const result = await User.insertOne({name: name,email:email,pass:pass});
+  const result = await User.insertOne({name,email,pass});
   return res.json(result);
 });
 
-// app.post("/login", async (req, res) => {
-//   const { email, pass } = req.body
-//   const result = await User.findOne({email, pass});
-//   return res.json(result);
-// });
+app.post("/login", async (req, res) => {
+  const { email, pass } = req.body
+  const result = await User.findOne({email, pass});
+  if (!result) return res.status(401).json({ message: "Invalid credentials" });
+  return res.json(result);
+});
 
 app.get("/greet", (req, res) => {
   res.send("Greetings");
@@ -46,12 +54,11 @@ app.get("/weather", (req, res) => {
   res.send("31degree");
 });
 
-app.get("/products", (req, res) => {
-  const products = [
-    { name: "Mobile", price: 34 },
-    { name: "Tablet", price: 64 },
-    { name: "Laptop", price: 45 },
-  ];
-  res.json(products);
+app.get("/products", async (req, res) => {
+  const products = await Product.find({});
+
+  if (!products) return res.status(404).json({ message: "No products found" });
+
+ return res.json(products);
 });
 
