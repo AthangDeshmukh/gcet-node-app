@@ -9,10 +9,15 @@ userRouter.post("/register", async (req, res) => {
   return res.json(result);
 });
 
-userRouter.post("/login", async (req, res) => {
-  const { email, pass } = req.body;
-  const result = await userModel.findOne({ email, pass });
-  if (!result) return res.json({ message: "Invalid user or password" });
+userRouter.get("/:id", async (req, res) => {
+  const email = req.params.id;
+  const result = await userModel.findOne({ email });
+  return res.json(result);
+});
+
+userRouter.get("/:id/name", async (req, res) => {
+  const email = req.params.id;
+  const result = await userModel.findOne({ email },{_id:0, name: 1});
   return res.json(result);
 });
 
