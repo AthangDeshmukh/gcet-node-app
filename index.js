@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from 'dotenv';
+
 import userRouter from "./routes/userRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
@@ -18,6 +19,12 @@ app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/orders",orderRouter)
 
+app.get("/", (req, res) => {
+  return res.send("Hello, World! This is the API Index.");
+  })
+
+
+
 mongoose
   .connect(MONGO_URI)
   .then(() => {
@@ -28,6 +35,9 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+
+
 // 
 // 
 //  import express from "express";
