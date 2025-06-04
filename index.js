@@ -1,12 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import cors from "cors";
-dotenv.config();
+// dotenv.config();
 import ordersRouter from "./routes/ordersRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import productRouter from "./routes/productRoutes.js";
-const MONGOCB_URI = process.env.MONGOCB_URI 
+// const MONGOCB_URI = process.env.MONGOCB_URI 
 // import userRouter from "./routes/userRoutes.js";
 // import productRouter from "./routes/productRoutes.js";
 
