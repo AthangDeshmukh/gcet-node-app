@@ -12,11 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// const MONGO_URI = process.env.MONGO_URI
+const MONGO_URI = process.env.MONGO_URI
 
-const DBUSER = encodeURIComponent(process.env.DBUSER)
-const DBPASS = encodeURIComponent(process.env.DBPASS)
-const MONGO_URI =`mongodb+srv://${DBUSER}:${DBPASS}@cluster0.phaazh3.mongodb.net/gcet?retryWrites=true&w=majority&appName=CluZster0`
+// const DBUSER = encodeURIComponent(process.env.DBUSER)
+// const DBPASS = encodeURIComponent(process.env.DBPASS)
+// const MONGO_URI =`mongodb+srv://${DBUSER}:${DBPASS}@cluster0.phaazh3.mongodb.net/gcet?retryWrites=true&w=majority&appName=CluZster0`
 
 
 app.use("/users", userRouter);
