@@ -19,9 +19,9 @@ const MONGO_URI = process.env.MONGO_URI
 // const MONGO_URI =`mongodb+srv://${DBUSER}:${DBPASS}@cluster0.phaazh3.mongodb.net/gcet?retryWrites=true&w=majority&appName=CluZster0`
 
 
-app.use("/users", userRouter);
-app.use("/products", productRouter);
-app.use("/orders",orderRouter)
+app.use("/user", userRouter);
+app.use("/product", productRouter);
+app.use("/order",orderRouter)
 
 mongoose
   .connect(MONGO_URI)
